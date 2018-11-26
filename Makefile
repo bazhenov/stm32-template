@@ -7,18 +7,20 @@ C_INCLUDES := -I./ \
 	-I$(SDK)/Drivers/CMSIS/Device/ST/STM32F1xx/Include \
 	-I$(SDK)/Drivers/CMSIS/Include
 
-C_DEFS := -DUSE_HAL_DRIVER \
-	-DSTM32F103x6
+C_DEFS := -DUSE_HAL_DRIVER -DSTM32F103xB
 
-LINKER_FLAGS := -specs=nano.specs -lc -lm -lnosys\
-	-T $(SDK)/Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/gcc/linker/STM32F103X6_FLASH.ld
+LINKER_FLAGS := -specs=nano.specs -lc -lm -lnosys \
+	-T STM32F103C8Tx_FLASH.ld
+	#-T $(SDK)/Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/gcc/linker/STM32F103X6_FLASH.ld
 
-CC_FLAGS := -o firmware.elf -Wl,--gc-sections -O0 -mthumb -mabi=aapcs -Wall -Wextra -fno-common -static -ffunction-sections -fdata-sections
+CC_FLAGS := -o firmware.elf -Wl,--gc-sections -Og -mthumb -mabi=aapcs -Wall -Wextra -fno-common -static -ffunction-sections -fdata-sections
 
 CPU := -mcpu=cortex-m3
 
 C_SOURCES = main.c \
+stm32f1xx_it.c \
 $(SDK)/Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/system_stm32f1xx.c \
+$(SDK)/Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/gcc/startup_stm32f103xb.s \
 $(SDK)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c \
 $(SDK)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c \
 $(SDK)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c \
@@ -31,8 +33,7 @@ $(SDK)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c \
 $(SDK)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c \
 $(SDK)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c \
 $(SDK)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c \
-$(SDK)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c \
-$(SDK)/Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/gcc/startup_stm32f103x6.s
+$(SDK)/Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c
 
 compile:
 	@echo "Making firmware..."
