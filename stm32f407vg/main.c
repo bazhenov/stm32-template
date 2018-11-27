@@ -8,7 +8,7 @@ int main(void) {
 	HAL_Init();
 	SystemClock_Config();
 
-	__HAL_RCC_GPIOC_CLK_ENABLE();
+	__HAL_RCC_GPIOD_CLK_ENABLE();
 
   GPIO_InitTypeDef ledPin = {0};
   ledPin.Pin = GPIO_PIN_13;
@@ -16,13 +16,13 @@ int main(void) {
   ledPin.Mode = GPIO_MODE_OUTPUT_PP;
 	ledPin.Pull = GPIO_NOPULL;
 
-  HAL_GPIO_Init(GPIOC, &ledPin);
+  HAL_GPIO_Init(GPIOD, &ledPin);
 
   while (1) {
-      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_RESET);
 			HAL_Delay(500);
 
-      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_SET);
       HAL_Delay(500);
   }
     while(1);
