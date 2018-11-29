@@ -4,3 +4,9 @@
 *.hex
 *.bin
 *.elf
+*.o
+*.a
+CMakeFiles
+CMakeCache.txt
+Makefile
+*.cmake

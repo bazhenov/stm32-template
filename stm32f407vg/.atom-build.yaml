@@ -1,0 +1,11 @@
+targets:
+  compile:
+    cmd: source .profile && make
+    args:
+      - firmware.elf
+    sh: true
+  clean:
+    cmd: make
+    args:
+      - clean
+    sh: true
