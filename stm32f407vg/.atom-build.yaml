@@ -12,3 +12,6 @@ targets:
     args:
       - rebuild_cache
     sh: true
+  compile-and-flash:
+    cmd: make && arm-none-eabi-objcopy -O ihex blinky blinky.hex && st-flash --format ihex write blinky.hex
+    sh: true
