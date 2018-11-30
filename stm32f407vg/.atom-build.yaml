@@ -1,11 +1,14 @@
 targets:
   compile:
-    cmd: source .profile && make
-    args:
-      - firmware.elf
+    cmd: make
     sh: true
   clean:
     cmd: make
     args:
       - clean
+    sh: true
+  rebuild-cache:
+    cmd: make
+    args:
+      - rebuild_cache
     sh: true
